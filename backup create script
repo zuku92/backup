@@ -1,0 +1,77 @@
+# პრაქტიკული ნაწილი, საკუთარი სცენარების შექმნა
+# ვწერთ პროგრამას რომელიც გააკეთებს საჭირო ფაილების კოპირებას (რეზერვს)
+
+# import os               # os modulis importi, os moduli gvexmareba operaciul sistebaze mimartvaze
+# import time             # time moduli standartuli tarigi-dro
+#
+# # გადმოვცერთ zip არქივატორს და ვინდოუსის სისტემურ პარამეტრებში path-ში გაუწერთ zip არქივატორის მისამართს(c:\\..\bin)
+# # ეს იმისთვის არის საჭირო რომ შევძლოთ ქომანდ ლაინის(cmd) საშუალებით zip არქივატორის მიმართვა
+#
+# # 1. ფაილები და კატალოგები რომელთა კოპირებაც უნდა მოხდეს ვუთითებთ ლისტ ობიექტში მათ მისამართებს
+# sourse = ['C:\\mydocuments','C:\\code']
+#
+# # 2. დარეზერვებული კოპირებული ფაილები უნდა ინახებოდეს მთავარ სარეზერვო კატალოგში(ვქმნით ცვლადს და ვანიჭებთ მისამართს)
+# target_dir = 'C:\\backup'
+#
+# # 3. სარეზერვო ფაილები გადაგვაქვს zip არქივში(ვაარქივებთ)
+# # 4. zip არქივებს სახელად ვარქმევთ მიმდინარე თარიღს და დროს
+# now = time.strftime('%H%M%S')
+# today = target_dir+os.sep+time.strftime('%Y%m%d')
+#
+# if not os.path.exists(today):
+#     os.mkdir(today)
+#     print('katalog created succesfuly',today)
+#
+#
+# user_coment = input('enter comment')
+#
+# if len(user_coment)==0:
+#     target =today+ os.sep +now+'.zip'
+# else:
+#     target =today+os.sep+now+'_'+user_coment.replace(' ','_')+'.zip'
+#
+#
+# # 5. გამოვიყენებთ სტანდარტულ ბრძანება zip-ს
+# zip_comand = "zip -qr {0} {1}".format(target,' '.join(sourse))
+# if os.system(zip_comand)==0:
+#     print('backup create succesfuly:',target)
+# else:
+#     print('backup not create!!')
+#
+#
+
+
+import os
+import time
+
+
+sourse=['c:\\mydocuments','c:\\code']
+
+target_dir = 'c:\\backup'
+
+today= target_dir+os.sep+time.strftime('%Y-%m-%d')
+
+now= time.strftime('%H-%M-%S')
+
+if not os.path.exists(today):
+    os.mkdir(today)
+    print('katalogi sheiqmna')
+
+
+user_coment = input('enter coment for backup:')
+if len(user_coment)==0:
+    target=today+os.sep+now+'.zip'
+else:
+    target=today+os.sep+now+'_'+user_coment+'.zip'
+
+
+
+
+zip_comand = 'zip -qr  {0} {1}'.format(target, ' '.join(sourse))     # zip_comand= 'c:\\backup\21-06-26.zip'. ['c:\\mydocuments','c:\\codes']
+
+if os.system(zip_comand)==0:
+    print('arqivi sheiqmna, misamarti->',target)
+
+else:
+    print('arqivi ar sheiqmna!')
+
